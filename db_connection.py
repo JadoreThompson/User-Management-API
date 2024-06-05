@@ -2,18 +2,10 @@ import os
 from dotenv import load_dotenv
 import psycopg2
 
-from pydantic import BaseModel
-
-class User(BaseModel):
-    name: str
-    email: str
-    password: str
-
-class APIResponse(BaseModel):
-    key: str
 
 
 load_dotenv('.env')
+
 
 def get_conn_cur():
     conn = psycopg2.connect(
@@ -26,6 +18,7 @@ def get_conn_cur():
     cur = conn.cursor()
 
     return conn, cur
+
 
 conn, cur = get_conn_cur()
 
@@ -53,4 +46,3 @@ cur.execute(create_table2)
 conn.commit()
 cur.close()
 conn.close()
-
